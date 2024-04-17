@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block title %}
+	AAO Degree Audit
+{% endblock %}
+
+{% block head %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+        <!--<div class="row">-->
+        <!--    <div class="d-flex justify-content-between">-->
+        <!--        <div>-->
+        <!--            <h1>Degree Requirements Progress</h1>-->
+        <!--        </div>-->
+        <!--        <div>-->
+        <!--            <a href="https://aao.nu.edu.kz/" target="_blank" class="d-flex justify-content-end">-->
+        <!--                {{ logo|safe }}-->
+        <!--            </a>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <a href="https://aao.nu.edu.kz/" target="_blank" class="d-flex">
+            {{ logo|safe }}
+        </a>
+
+        <h1>DEGREE REQUIREMENTS PROGRESS</h1>
+
+        <div class="row">
+            <p>
+                {{ disclaimer }}
+            </p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Majors</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 1%;">#</th>
+                            <th scope="col">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% with 1 as i %}
+                            {% for program in ug_programs %}
+                                <tr>
+                                    <th scope="row">{{ i }}</th>
+                                    <th><a href="audit/{{ program.id }}">{{ program.name }}</a></th>
+                                </tr>
+                                {% increment i as i %}
+                            {% endfor %}
+                        {% endwith %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
